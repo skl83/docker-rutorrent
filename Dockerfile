@@ -14,6 +14,7 @@ RUN \
 	geoip \
 	gzip \
 	logrotate \
+	nfs-utils \
 	nginx \
 	rtorrent \
 	screen \
