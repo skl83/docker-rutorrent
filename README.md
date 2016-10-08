@@ -23,8 +23,8 @@ Popular rtorrent client with a webui for ease of use. [Rutorrent](https://github
 
 ```
 docker create --name=rutorrent \
--v <path to data>:/config \
--v <path to downloads>:/downloads \
+-e SERVER=<server>
+-e SHARE=<share>
 -e PGID=<gid> -e PUID=<uid> \
 -e TZ=<timezone> \
 -p 80:80 -p 5000:5000 \
@@ -38,8 +38,8 @@ linuxserver/rutorrent
 * `-p 5000` - the port(s)
 * `-p 51413` - the port(s)
 * `-p 6881/udp` - the port(s)
-* `-v /config` - where rutorrent should store it's config files
-* `-v /downloads` - path to your downloads folder
+* `-e SERVER` - NFS SERVER for rutorrent share mount
+* `-e SHARE` - NFS SHARE - will have config and downloads folders created for use by rutorrent
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
 * `-e TZ` for timezone information, eg Europe/London
@@ -87,3 +87,4 @@ Umask can be set in the /config/rtorrent/rtorrent.rc file by changing value in `
 in /config/php.
 + **26.07.16:** Rebase to alpine.
 + **08.03.16:** Intial Release.
++ ** Forked - added NFS client to use NFS share for downloads and configs
