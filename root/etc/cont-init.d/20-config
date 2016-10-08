@@ -1,5 +1,14 @@
 #!/usr/bin/with-contenv bash
 
+#mount nfs shares using env
+mkdir -p "/config"
+mkdir -p "/downloads"
+
+rpcbind -f &
+mount -t "$FSTYPE" -o "$MOUNT_OPTIONS" "$SERVER:$SHARE/config" "/config"
+mount -t "$FSTYPE" -o "$MOUNT_OPTIONS" "$SERVER:$SHARE/downloads" "/downloads"
+mount | grep nfs
+
 # make folders
 mkdir -p \
 	/config{/log/nginx,/log/rtorrent,/log/rutorrent,/nginx,/php,/rtorrent/rtorrent_sess,/rutorrent/settings/users} \
@@ -43,11 +52,11 @@ cp /config/php/php.ini /etc/php7/php.ini
 	rm /config/rtorrent/rtorrent_sess/rtorrent.lock
 
 # permissions
-chown abc:abc \
+chmod -R 777 \
 	/downloads \
 	/downloads{/completed,/incoming,/watched}
 
-chown -R abc:abc \
+chmod -R 777 \
 	/config \
 	/run \
 	/usr/share/webapps/rutorrent \
