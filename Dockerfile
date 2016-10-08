@@ -4,6 +4,11 @@ MAINTAINER sparklyballs
 # package version
 ARG MEDIAINF_VER="0.7.88"
 
+#ENV variables for NFS mounts
+
+ENV FSTYPE nfs4
+ENV MOUNT_OPTIONS nfsvers=4,rw
+
 # install runtime packages
 RUN \
  apk add --no-cache \
